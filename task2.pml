@@ -18,8 +18,8 @@ proctype proc (byte index) {
 	
 	printf("Process %d has control.\n", index);
 	
-	// Reset print flag in array.
-	print_vars[index] = false;
+	// Reset print flag in array
+.	print_vars[index] = false;
 	total--;
 
 	// Release mutex. -- CRITICAL SECTION END.
@@ -30,8 +30,8 @@ proctype proc (byte index) {
 // Requires fixing, currently not used by tester.
 never {
 	do
-	:: (total > 1) -> break;
-	:: else
+	:: total > 1 -> break;
+	:: else;
 	od;
 }
 
@@ -42,7 +42,9 @@ init {
 	// Start N processes.
 	curr_index = 0;
 	do
-	:: (curr_index < 10) -> run proc(curr_index); curr_index = curr_index + 1;
+	:: (curr_index < PROC_NUM) -> 
+		run proc(curr_index); 
+		curr_index = curr_index + 1;
 	:: else -> break;
 	od;
 }

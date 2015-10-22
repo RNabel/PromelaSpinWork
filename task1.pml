@@ -1,3 +1,5 @@
+#define CHANNEL_CAP 1
+
 proctype Sender(chan int1; chan int2) {
 	byte current_count = 1;
 
@@ -64,16 +66,16 @@ init {
 	byte lastpid;
 
 	// Channels to the Intermediate processes.
-	chan int1 = [1] of {byte};
-	chan int2 = [1] of {byte};
+	chan int1 = [CHANNEL_CAP] of {byte};
+	chan int2 = [CHANNEL_CAP] of {byte};
 
 	// Integers to hold sums of Intremediate processes.
 	byte sum_of_int1 = 0;
 	byte sum_of_int2 = 0;
 
 	// Channel from Intermediate to Receiver.
-	chan recv = [1] of {byte};
-	chan finished = [1] of {bit};
+	chan recv = [CHANNEL_CAP] of {byte};
+	chan finished = [CHANNEL_CAP] of {bit};
 	
 	bit finish = false;
 
